@@ -8,30 +8,44 @@
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
-    makeClock = function(startTime) {
+
+	timeZoneInput = 
+		[
+			{key:"Bangladesh", value:6},{key:"Burkina Faso", value:0},{key:"Colorado", value:-7},{key:"Ethiopia", value:3},{key:"Ghana", value:0},{key:"India", value:5.5},{key:"Kenya", value:3},{key:"Lesotho", value:2},{key:"Liberia", value:0},{key:"Madagascar", value:3},{key:"Malawi", value:2},{key:"Mali", value:0},{key:"Melbourne", value:11},{key:"Mozambique", value:2},{key:"Nepal", value:5.75},{key:"New York", value:-5},{key:"Niger", value:1},{key:"Nigeria", value:1},{key:"Pakistan", value:5},{key:"Sierra Leone", value:0},{key:"South Africa", value:2},{key:"Swaziland", value:2},{key:"Sweden", value:1},{key:"Tanzania", value:3},{key:"Uganda", value:3},{key:"UK", value:0},{key:"Zambia", value:2}
+		]
+		
+	var timeZones = {};
+
+	for(var i = 0; i < timeZoneInput.length; i++)
+	{
+		timeZones[timeZoneInput[i].key] = timeZoneInput[i].value;
+	}
+			
+
+    makeClock = function(tZ) {
 
         // Clock look-n-feel: customize at will!
-        var width = 360,
-            height = 360,
-            strokeWidth = 6,
+        var width = 135,
+            height = 135,
+            strokeWidth = 3,
             clockFillColor = "none",
             clockBorderColor = "#B7B7B7",
             clockHandColor = "#FEBE12",
             clockCenterColor = "#FEBE12",
             transitionEnabled = 1,
-            radius = width / 2,
+            radius = width / 2 - 15,
             vis, clock, hourPosition, minutePosition, clockhand, hourPositionOffset;
     
+		timeDifference = timeZones[tZ];
         // Set up time
         var now = new Date();
-		
 		{
         var data = [{
             'unit': 'minutes',
             'value': now.getMinutes()
         }, {
             'unit': 'hours',
-            'value': now.getHours() + startTime
+            'value': now.getHours() + timeDifference
         }];   
 		}
 			
@@ -65,6 +79,14 @@
         clock = vis.append("svg:g")
             .attr("transform", "translate(" + radius + "," + radius + ")");
     
+		// Add name
+		clock.append("svg:text")
+			.attr("class", "clocktext")
+			.attr("x", 0)
+			.attr("y", height/2 +5)
+			.text(tZ)
+			.attr("text-anchor", "middle");
+	
         // Clock face
         clock.append("svg:circle")
             .attr("class", "clockface")
@@ -160,9 +182,15 @@
             .attr("fill", "#fff")
             .attr("stroke", clockCenterColor)
             .attr("stroke-width", strokeWidth + 2);
+			
+			
+		
+		
             
     };
 	
-	makeClock(1);
-	makeClock(0);
+	
+	
+	makeClock("Bangladesh");
+	makeClock("UK");
 </script>
