@@ -4,8 +4,38 @@
     .clock { margin: 7% auto; display: block; }
 </style>
 
-<div class="d3clock"></div>
+<div class="clocktable">
+	<div class="col1"></div>
 
+	<div class="col2"></div>
+	<div class="col3"></div>
+	<div class="col4"></div>
+	<div class="col5"></div>
+</div>
+
+<style>
+.col1
+{
+ display: inline-block;
+}
+.col2
+{
+ display: inline-block;
+}
+.col3
+{
+ display: inline-block;
+}
+.col4
+{
+ display: inline-block;
+}
+.col5
+{
+ display: inline-block;
+}
+
+</style>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
@@ -22,7 +52,7 @@
 	}
 			
 
-    makeClock = function(tZ) {
+    makeClock = function(tZ, column) {
 
         // Clock look-n-feel: customize at will!
         var width = 135,
@@ -70,7 +100,7 @@
             .range([0, Math.PI / 6]);
     
         // Set up SVG
-        vis = d3.select("div.d3clock")
+        vis = d3.select("div.col" + column)
             .append("svg:svg")
             .attr("class", "clock")
             .attr("width", width)
@@ -182,15 +212,37 @@
             .attr("fill", "#fff")
             .attr("stroke", clockCenterColor)
             .attr("stroke-width", strokeWidth + 2);
-			
-			
-		
-		
             
     };
 	
+	makeClock("Ghana", 5);
+	makeClock("Madagascar", 5);
+	makeClock("Nepal", 5);
+	makeClock("Sierra Leone", 5);
+	makeClock("Zambia", 5);
 	
+	makeClock("Ethiopia", 4);
+	makeClock("Liberia", 4);
+	makeClock("Mozambique", 4);
+	makeClock("Pakistan", 4);
+	makeClock("Uganda", 4);
 	
-	makeClock("Bangladesh");
-	makeClock("UK");
+	makeClock("Colorado", 3);
+	makeClock("Lesotho", 3);
+	makeClock("Melbourne", 3);
+	makeClock("Nigeria", 3);
+	makeClock("Tanzania", 3);
+	
+	makeClock("Burkina Faso", 2);
+	makeClock("Kenya", 2);
+	makeClock("Mali", 2);
+	makeClock("Niger", 2);
+	makeClock("Swaziland", 2);
+	
+	makeClock("Bangladesh", 1);
+	makeClock("India", 1);
+	makeClock("Malawi", 1);
+	makeClock("New York", 1);
+	makeClock("South Africa", 1);
+
 </script>
